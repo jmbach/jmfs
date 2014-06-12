@@ -150,7 +150,9 @@ public class AppleDisk extends Storage implements Writable {
 			throw new Exception( "Can not add partition - will not fit on disk: partition.size=" + partition.getSizeBlocks() + ", freeSpace=" + freeSpace );
 		
 		partition.setNumber		( partitions.size()+1 );
-		partition.setStartBlock	( (int)getNextFreeBlock() );
+//		partition.setStartBlock	( (int)getNextFreeBlock() ); fix to deal with images larger than 2147483647 sectors
+		partition.setStartBlock	( (long)getNextFreeBlock() );
+		
 		
 		partitions.add( partition );
 		
